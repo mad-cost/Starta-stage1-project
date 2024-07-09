@@ -11,36 +11,30 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class MemoController {
+  private final MemoService memoService;
 
-  private final JdbcTemplate jdbcTemplate;
-
-  // JdbcTemplate사용, final로 선언한 생성자 만들어주기 or @RequiredArgsConstructor선언해주기
   public MemoController(JdbcTemplate jdbcTemplate) {
-    this.jdbcTemplate = jdbcTemplate;
+    this.memoService = new MemoService(jdbcTemplate);
   }
 
   @PostMapping("/memos")
   public MemoResponseDto createMemo(@RequestBody MemoRequestDto requestDto) {
-    MemoService memoService = new MemoService(jdbcTemplate);
     return memoService.createMemo(requestDto);
   }
 
   @GetMapping("/memos")
   public List<MemoResponseDto> getMemos() {
-    MemoService memoService = new MemoService(jdbcTemplate);
     return memoService.getMemos();
   }
 
   @PutMapping("/memos/{id}")
   public Long updateMemo(@PathVariable Long id, @RequestBody MemoRequestDto requestDto) {
-    MemoService memoService = new MemoService(jdbcTemplate);
     // 받아온 id, 수정할 데이터
     return memoService.updateMemo(id, requestDto);
   }
 
   @DeleteMapping("/memos/{id}")
   public Long deleteMemo(@PathVariable Long id) {
-    MemoService memoService = new MemoService(jdbcTemplate);
     return memoService.deleteMemo(id);
   }
 
