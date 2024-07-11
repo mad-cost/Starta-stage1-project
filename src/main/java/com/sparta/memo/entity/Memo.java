@@ -11,7 +11,8 @@ import lombok.Setter;
 @Setter
 @Table(name = "memo") // 매핑할 테이블의 이름을 지정
 @NoArgsConstructor
-public class Memo {
+// Auditing기능을 사용하기 위해, Timestamped를 상속받아 createdAt, modifiedAt를 사용
+public class Memo extends Timestamped{
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY) // AutoIncrement: 자동 증가
   private Long id;
