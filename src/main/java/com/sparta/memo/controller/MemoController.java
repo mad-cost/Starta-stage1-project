@@ -22,6 +22,7 @@ public class MemoController {
     return memoService.createMemo(requestDto);
   }
 
+  // '/'페이지
   @GetMapping("/memos")
   public List<MemoResponseDto> getMemos() {
     return memoService.getMemos();
